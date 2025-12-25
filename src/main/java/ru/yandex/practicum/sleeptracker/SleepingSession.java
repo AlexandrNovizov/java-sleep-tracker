@@ -2,6 +2,7 @@ package ru.yandex.practicum.sleeptracker;
 
 import ru.yandex.practicum.sleeptracker.exceptions.IllegalTimeRangeException;
 import ru.yandex.practicum.sleeptracker.exceptions.InvalidStringFormatException;
+import ru.yandex.practicum.sleeptracker.exceptions.NotNightSessionException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -73,6 +74,10 @@ public class SleepingSession {
     }
 
     public NightType nightType() {
+
+        if (!isNightSession()) {
+            throw new NotNightSessionException("Сессия " + this + " не ночная");
+        }
 
         LocalDateTime boundsStart = LocalDateTime.of(start.toLocalDate(), LocalTime.of(23, 0));
         LocalDateTime boundsEnd = LocalDateTime.of(end.toLocalDate(), LocalTime.of(9, 0));
