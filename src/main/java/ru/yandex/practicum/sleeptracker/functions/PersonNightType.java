@@ -13,19 +13,19 @@ public class PersonNightType extends AnalysisFunction<NightType> {
 
         long hummingBirdCount = sleepingSessions.stream()
                 .filter(SleepingSession::isNightSession)
-                .map(SleepingSession::nightType)
+                .map(SleepingSession::getNightType)
                 .filter(nightType -> nightType == NightType.HUMMINGBIRD)
                 .count();
 
         long nightOwlCount = sleepingSessions.stream()
                 .filter(SleepingSession::isNightSession)
-                .map(SleepingSession::nightType)
+                .map(SleepingSession::getNightType)
                 .filter(nightType -> nightType == NightType.NIGHT_OWL)
                 .count();
 
         long earlyBirdCount = sleepingSessions.stream()
                 .filter(SleepingSession::isNightSession)
-                .map(SleepingSession::nightType)
+                .map(SleepingSession::getNightType)
                 .filter(nightType -> nightType == NightType.EARLY_BIRD)
                 .count();
 

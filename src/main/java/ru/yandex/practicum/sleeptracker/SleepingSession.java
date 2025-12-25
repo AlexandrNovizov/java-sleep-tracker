@@ -73,7 +73,7 @@ public class SleepingSession {
         return true;
     }
 
-    public NightType nightType() {
+    public NightType getNightType() {
 
         if (!isNightSession()) {
             throw new NotNightSessionException("Сессия " + this + " не ночная");

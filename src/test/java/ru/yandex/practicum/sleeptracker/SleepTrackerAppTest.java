@@ -35,6 +35,6 @@ public class SleepTrackerAppTest {
                 SleepQuality.NORMAL
         );
 
-        assertThrows(NotNightSessionException.class, session::nightType);
+        assertThrows(NotNightSessionException.class, session::getNightType);
     }
 }
