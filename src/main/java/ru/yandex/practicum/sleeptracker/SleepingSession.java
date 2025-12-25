@@ -40,7 +40,7 @@ public class SleepingSession {
             throw new FileNotFoundException("Файл лога по пути " + path + " не найден!");
         }
 
-        try(Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8)) {
+        try (Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8)) {
             return lines
                     .map(SleepingSession::fromString)
                     .collect(Collectors.toList());

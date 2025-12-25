@@ -1,7 +1,6 @@
 package ru.yandex.practicum.sleeptracker.functions;
 
 import ru.yandex.practicum.sleeptracker.results.LongResult;
-import ru.yandex.practicum.sleeptracker.results.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.SleepingSession;
 import ru.yandex.practicum.sleeptracker.exceptions.NotNightSessionException;
 
