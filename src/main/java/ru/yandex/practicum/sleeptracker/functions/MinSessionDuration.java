@@ -7,7 +7,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
-public class MinSessionDuration extends AnalysisFunction<Long> {
+public class MinSessionDuration extends SleepAnalysisFunction<Long> {
     @Override
     public LongResult apply(List<? extends SleepingSession> sleepingSessions) {
         super.apply(sleepingSessions);

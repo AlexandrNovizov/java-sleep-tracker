@@ -7,7 +7,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.OptionalDouble;
 
-public class AverageSessionDuration extends AnalysisFunction<Double> {
+public class AverageSessionDuration extends SleepAnalysisFunction<Double> {
     @Override
     public DoubleResult apply(List<? extends SleepingSession> sleepingSessions) {
         super.apply(sleepingSessions);

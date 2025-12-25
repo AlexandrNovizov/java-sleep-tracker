@@ -6,7 +6,7 @@ import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
 
-public class BadSessionsCount extends AnalysisFunction<Long> {
+public class BadSessionsCount extends SleepAnalysisFunction<Long> {
     @Override
     public LongResult apply(List<? extends SleepingSession> sleepingSessions) {
         super.apply(sleepingSessions);

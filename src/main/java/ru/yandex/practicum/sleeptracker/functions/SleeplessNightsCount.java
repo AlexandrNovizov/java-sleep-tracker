@@ -10,7 +10,7 @@ import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 
-public class SleeplessNightsCount extends AnalysisFunction<Long> {
+public class SleeplessNightsCount extends SleepAnalysisFunction<Long> {
     @Override
     public LongResult apply(List<? extends SleepingSession> sleepingSessions) {
         super.apply(sleepingSessions);

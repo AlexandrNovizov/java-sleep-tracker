@@ -7,7 +7,7 @@ import ru.yandex.practicum.sleeptracker.exceptions.EmptyListException;
 import java.util.List;
 import java.util.function.Function;
 
-public abstract class AnalysisFunction<T> implements Function<List<? extends SleepingSession>, SleepAnalysisResult<T>> {
+public abstract class SleepAnalysisFunction<T> implements Function<List<? extends SleepingSession>, SleepAnalysisResult<T>> {
     @Override
     public SleepAnalysisResult<T> apply(List<? extends SleepingSession> sleepingSessions) {
         if (sleepingSessions.isEmpty()) {

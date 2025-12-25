@@ -11,7 +11,7 @@ import java.util.List;
 public class SleepTrackerApp {
 
     static List<SleepingSession> sleepingSessions = new ArrayList<>();
-    static List<AnalysisFunction<?>> functions = new ArrayList<>();
+    static List<SleepAnalysisFunction<?>> functions = new ArrayList<>();
 
     public static void main(String[] args) {
 

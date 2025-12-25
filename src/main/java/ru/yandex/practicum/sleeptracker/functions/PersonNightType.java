@@ -6,7 +6,7 @@ import ru.yandex.practicum.sleeptracker.results.NightTypeResult;
 
 import java.util.List;
 
-public class PersonNightType extends AnalysisFunction<NightType> {
+public class PersonNightType extends SleepAnalysisFunction<NightType> {
     @Override
     public NightTypeResult apply(List<? extends SleepingSession> sleepingSessions) {
         super.apply(sleepingSessions);
