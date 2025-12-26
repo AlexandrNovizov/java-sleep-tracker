@@ -4,9 +4,14 @@ import ru.yandex.practicum.sleeptracker.exceptions.InvalidStringFormatException;
 import ru.yandex.practicum.sleeptracker.functions.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SleepTrackerApp {
 
@@ -23,7 +28,7 @@ public class SleepTrackerApp {
         initFunctions();
 
         try {
-            sleepingSessions = SleepingSession.readFile(args[0]);
+            sleepingSessions = readFile(args[0]);
         } catch (InvalidPathException e) {
             System.out.println("Недопустимый путь: " + args[0]);
             System.exit(-1);
@@ -56,5 +61,20 @@ public class SleepTrackerApp {
         functions.add(new BadSessionsCount());
         functions.add(new SleeplessNightsCount());
         functions.add(new PersonNightType());
+    }
+
+    public static List<SleepingSession> readFile(String filepath) throws IOException {
+        Path path = Path.of(filepath);
+        if (!Files.exists(path)) {
+            throw new FileNotFoundException("Файл лога по пути " + path + " не найден!");
+        }
+
+        try (Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8)) {
+            return lines
+                    .map(SleepingSession::fromString)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new IOException(e.getMessage());
+        }
     }
 }

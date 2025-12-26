@@ -4,26 +4,21 @@ import ru.yandex.practicum.sleeptracker.exceptions.IllegalTimeRangeException;
 import ru.yandex.practicum.sleeptracker.exceptions.InvalidStringFormatException;
 import ru.yandex.practicum.sleeptracker.exceptions.NotNightSessionException;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class SleepingSession {
 
-    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
+    public static final int NIGHT_START = 0;
+    public static final int NIGHT_END = 6;
+    public static final int MIDDAY = 12;
 
-    final LocalDateTime start;
-    final LocalDateTime end;
-    final SleepQuality quality;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
+    private final SleepQuality quality;
 
     public SleepingSession(LocalDateTime start, LocalDateTime end, SleepQuality quality) {
         if (!start.isBefore(end)) {
@@ -34,20 +29,7 @@ public class SleepingSession {
         this.quality = quality;
     }
 
-    public static List<SleepingSession> readFile(String filepath) throws IOException {
-        Path path = Path.of(filepath);
-        if (!Files.exists(path)) {
-            throw new FileNotFoundException("Файл лога по пути " + path + " не найден!");
-        }
 
-        try (Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8)) {
-            return lines
-                    .map(SleepingSession::fromString)
-                    .collect(Collectors.toList());
-        } catch (IOException e) {
-            throw new IOException(e.getMessage());
-        }
-    }
 
     public static SleepingSession fromString(String session) throws InvalidStringFormatException {
         String[] parts = session.split(";");
@@ -67,7 +49,7 @@ public class SleepingSession {
 
     public boolean isNightSession() {
         if (start.toLocalDate().equals(end.toLocalDate())) {
-            return start.getHour() < 6;
+            return start.getHour() < NIGHT_END;
         }
 
         return true;

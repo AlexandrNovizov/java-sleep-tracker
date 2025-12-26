@@ -141,4 +141,45 @@ public class SleeplessNightsCountTest {
         LongResult res = new SleeplessNightsCount().apply(sessions);
         assertEquals(2, res.getResult());
     }
+
+    @Test
+    void shouldReturn1If1SleeplessNightWithFirstSessionStartAfter0Hours() {
+        sessions.add(new SleepingSession(
+                LocalDateTime.of(2025, Month.OCTOBER, 1, 1, 0),
+                LocalDateTime.of(2025, Month.OCTOBER, 1, 7, 0),
+                SleepQuality.GOOD
+        ));
+        sessions.add(new SleepingSession(
+                LocalDateTime.of(2025, Month.OCTOBER, 2, 7, 0),
+                LocalDateTime.of(2025, Month.OCTOBER, 2, 12, 0),
+                SleepQuality.GOOD
+        ));
+
+        LongResult res = new SleeplessNightsCount().apply(sessions);
+
+        assertEquals(1, res.getResult());
+    }
+
+    @Test
+    void shouldReturn1If1SleeplessNightWithLastSessionInDifferentMonth() {
+        sessions.add(new SleepingSession(
+                LocalDateTime.of(2025, Month.OCTOBER, 31, 1, 0),
+                LocalDateTime.of(2025, Month.OCTOBER, 31, 7, 0),
+                SleepQuality.GOOD
+        ));
+        sessions.add(new SleepingSession(
+                LocalDateTime.of(2025, Month.NOVEMBER, 1, 7, 0),
+                LocalDateTime.of(2025, Month.NOVEMBER, 1, 12, 0),
+                SleepQuality.GOOD
+        ));
+        sessions.add(new SleepingSession(
+                LocalDateTime.of(2025, Month.NOVEMBER, 1, 23, 0),
+                LocalDateTime.of(2025, Month.NOVEMBER, 2, 5, 0),
+                SleepQuality.GOOD
+        ));
+
+        LongResult res = new SleeplessNightsCount().apply(sessions);
+
+        assertEquals(1, res.getResult());
+    }
 }
