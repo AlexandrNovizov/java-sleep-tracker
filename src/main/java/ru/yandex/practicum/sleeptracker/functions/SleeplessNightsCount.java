@@ -26,13 +26,10 @@ public class SleeplessNightsCount extends SleepAnalysisFunction<Long> {
         long allNights = Period.between(startPeriod.toLocalDate(), endPeriod.toLocalDate()).getDays();
 
         if (startPeriod.toLocalDate().equals(endPeriod.toLocalDate()) && sleepNights != 0) {
-            allNights = sleepNights;
+            allNights = 0;
         }
 
-        if (startPeriod.getHour() < 12) {
-            if (startPeriod.getHour() < 6) {
-                sleepNights++;
-            }
+        if (startPeriod.getHour() < SleepingSession.MIDDAY) {
             allNights++;
         }
 
@@ -40,7 +37,7 @@ public class SleeplessNightsCount extends SleepAnalysisFunction<Long> {
         return new LongResult(Math.abs(allNights - sleepNights), details);
     }
 
-    static class Night {
+    private static class Night {
         final LocalDate from;
         final LocalDate to;
 
